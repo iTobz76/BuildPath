@@ -9,3 +9,5 @@ A Mimo (mimo.org) inspired iOS/PWA app for learning Swift and Python through sho
 Logins are powered by **Cloudflare** (https://github.com/cloudflare) and **PocketBase** (https://github.com/pocketbase)
 
 _**CREATED IN CO-OPERATION WITH CLAUDE (ANTHROPIC)**_
+[![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://github.com/cloudflare)
+[![PocketBase](https://img.shields.io/badge/PocketBase-B4005E?style=for-the-badge&logo=pocketbase&logoColor=white)](https://github.com/pocketbase)
