@@ -27,4 +27,4 @@
   [![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://github.com/cloudflare) 
   [![PocketBase](https://img.shields.io/badge/PocketBase-B4005E?style=for-the-badge&logo=pocketbase&logoColor=white)](https://github.com/pocketbase)
 * **Developed With:** 
-  [![Claude](https://img.shields.io/badge/Claude-D97706?style=for-the-badge&logo=anthropic&logoColor=white)](https://anthropic.com)
+  [![Claude](https://img.shields.io/badge/Claude-D97706?style=for-the-badge&logo=claude&logoColor=white)](https://claude.com/product/overview)
