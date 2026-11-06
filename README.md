@@ -1,5 +1,7 @@
 # BuildPath
 
+Licensed under the [MIT License](LICENSE). Copyright (c) 2026 Tobz.
+
 **Live demo:** [learn.perthhomelab.dev](https://learn.perthhomelab.dev)
 
 
