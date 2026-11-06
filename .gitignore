@@ -1,0 +1,13 @@
+# Server data: your real database, never commit this
+server/pb_data/
+server/.docker/
+
+# Swift / xtool build output
+.build/
+xtool/
+*.ipa
+.DS_Store
+
+# Secrets
+server/.env
+.env

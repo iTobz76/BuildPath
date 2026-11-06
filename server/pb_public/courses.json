@@ -1,0 +1,1829 @@
+[
+ {
+  "id": "swift-foundations",
+  "language": "swift",
+  "title": "Swift Foundations",
+  "subtitle": "Learn the basics by building a tip calculator, one piece at a time.",
+  "capstone": "Tip Calculator",
+  "capstoneCode": "import Foundation\n\nstruct Meal {\n    let name: String\n    let price: Double\n}\n\nfunc calculateTip(bill: Double, percent: Double) -> Double {\n    return bill * percent\n}\n\nlet rating: Int? = 5\nvar percent = 0.10\nif (rating ?? 3) >= 4 {\n    percent = 0.20\n}\n\nlet meals = [Meal(name: \"Pasta\", price: 24.0), Meal(name: \"Steak\", price: 38.5)]\nfor meal in meals {\n    let tip = calculateTip(bill: meal.price, percent: percent)\n    print(\"\\(meal.name): tip $\\(String(format: \"%.2f\", tip))\")\n}",
+  "lessons": [
+   {
+    "id": "l1",
+    "title": "Constants",
+    "buildNote": "Your calculator now stores the bill amount.",
+    "steps": [
+     {
+      "id": "l1s1",
+      "kind": "learn",
+      "title": "Constants with let",
+      "body": "A **constant** stores a value that never changes. Write `let`, a name, `=`, then the value.",
+      "code": "let billAmount = 84.50\nprint(billAmount)"
+     },
+     {
+      "id": "l1s2",
+      "kind": "gapFill",
+      "title": "Store the bill",
+      "body": "Fill in the blank to create a constant called `billAmount`.",
+      "code": "___ billAmount = 84.50",
+      "options": [
+       "let",
+       "var",
+       "func",
+       "print"
+      ],
+      "answers": [
+       "let"
+      ]
+     },
+     {
+      "id": "l1s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a constant named `billAmount` set to `84.50`.",
+      "answers": [
+       "let billAmount = 84.50",
+       "let billAmount = 84.5"
+      ],
+      "hint": "Start with let."
+     }
+    ]
+   },
+   {
+    "id": "l2",
+    "title": "Numbers & maths",
+    "buildNote": "It can now work out a tip from a percentage.",
+    "steps": [
+     {
+      "id": "l2s1",
+      "kind": "learn",
+      "title": "Maths in Swift",
+      "body": "Swift uses `+`, `-`, `*` and `/`. Multiply the bill by the tip percentage to get the tip.",
+      "code": "let total = 50.0 * 0.2"
+     },
+     {
+      "id": "l2s2",
+      "kind": "reorder",
+      "title": "Order matters",
+      "body": "Put the lines in order. A constant must exist before you use it.",
+      "lines": [
+       "let billAmount = 84.50",
+       "let tipPercent = 0.15",
+       "let tip = billAmount * tipPercent"
+      ]
+     },
+     {
+      "id": "l2s3",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "The tip should be the bill **multiplied** by the percentage. Fix the code.",
+      "code": "let tipPercent = 0.15\nlet tip = billAmount + tipPercent",
+      "answers": [
+       "let tipPercent = 0.15\nlet tip = billAmount * tipPercent"
+      ],
+      "hint": "Which operator multiplies?"
+     }
+    ]
+   },
+   {
+    "id": "l3",
+    "title": "Strings & output",
+    "buildNote": "It now prints a friendly result.",
+    "steps": [
+     {
+      "id": "l3s1",
+      "kind": "learn",
+      "title": "String interpolation",
+      "body": "Put a value inside text with `\\( )`.",
+      "code": "let name = \"Sam\"\nprint(\"Hi \\(name)\")"
+     },
+     {
+      "id": "l3s2",
+      "kind": "gapFill",
+      "title": "Show the tip",
+      "body": "Fill in the blank so the message shows the tip.",
+      "code": "print(\"Tip: $\\(___)\")",
+      "options": [
+       "tip",
+       "billAmount",
+       "let",
+       "print"
+      ],
+      "answers": [
+       "tip"
+      ]
+     },
+     {
+      "id": "l3s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Print `Tip: $` followed by the `tip` value using interpolation.",
+      "answers": [
+       "print(\"Tip: $\\(tip)\")"
+      ],
+      "hint": "print(\"... \\(value)\")"
+     }
+    ]
+   },
+   {
+    "id": "l4",
+    "title": "Functions",
+    "buildNote": "Your calculator is now reusable with a function.",
+    "steps": [
+     {
+      "id": "l4s1",
+      "kind": "learn",
+      "title": "Reusable code",
+      "body": "A **function** packages code you can run again. `->` says what type it gives back.",
+      "code": "func double(_ n: Int) -> Int {\n    return n * 2\n}\nprint(double(4))"
+     },
+     {
+      "id": "l4s2",
+      "kind": "reorder",
+      "title": "Build the function",
+      "body": "Put the function in order.",
+      "lines": [
+       "func calculateTip(bill: Double, percent: Double) -> Double {",
+       "    return bill * percent",
+       "}"
+      ]
+     },
+     {
+      "id": "l4s3",
+      "kind": "write",
+      "title": "Call it",
+      "body": "Create a constant `tip` by calling `calculateTip` with `billAmount` and `0.15`.",
+      "answers": [
+       "let tip = calculateTip(bill: billAmount, percent: 0.15)"
+      ],
+      "hint": "Labels: bill: and percent:"
+     }
+    ]
+   },
+   {
+    "id": "l5",
+    "title": "Decisions",
+    "buildNote": "Your calculator now picks the tip size from a rating.",
+    "steps": [
+     {
+      "id": "l5s1",
+      "kind": "learn",
+      "title": "Making decisions",
+      "body": "An `if` runs code only when its condition is true. Compare values with `>`, `<`, `>=`, `<=` and `==`.",
+      "code": "let rating = 5\nif rating >= 4 {\n    print(\"Great service!\")\n}"
+     },
+     {
+      "id": "l5s2",
+      "kind": "gapFill",
+      "title": "Pick the condition",
+      "body": "Great service (a rating of **4 or more**) earns the bigger tip. Fill in the operator.",
+      "code": "if rating ___ 4 {\n    percent = 0.20\n}",
+      "options": [
+       ">=",
+       "==",
+       "=",
+       "<"
+      ],
+      "answers": [
+       ">="
+      ]
+     },
+     {
+      "id": "l5s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write an `if` statement that sets `percent` to `0.20` when `rating` is 4 or more.",
+      "answers": [
+       "if rating >= 4 {\n    percent = 0.20\n}",
+       "if rating >= 4 {\n    percent = 0.2\n}"
+      ],
+      "hint": "if condition { ... }"
+     }
+    ]
+   },
+   {
+    "id": "l6",
+    "title": "Arrays",
+    "buildNote": "It can now hold a whole list of bills.",
+    "steps": [
+     {
+      "id": "l6s1",
+      "kind": "learn",
+      "title": "Lists of values",
+      "body": "An **array** holds several values in order. Use square brackets and commas. Counting starts at **0**.",
+      "code": "let bills = [42.0, 84.50, 19.99]\nprint(bills[0])\nprint(bills.count)"
+     },
+     {
+      "id": "l6s2",
+      "kind": "gapFill",
+      "title": "Get the first bill",
+      "body": "Arrays count from 0. Fill in the blank to get the **first** bill.",
+      "code": "let first = bills[___]",
+      "options": [
+       "0",
+       "1",
+       "3",
+       "first"
+      ],
+      "answers": [
+       "0"
+      ]
+     },
+     {
+      "id": "l6s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Create a constant named `bills` holding `42.0`, `84.50` and `19.99`.",
+      "answers": [
+       "let bills = [42.0, 84.50, 19.99]",
+       "let bills = [42.0, 84.5, 19.99]",
+       "let bills = [42, 84.50, 19.99]",
+       "let bills = [42, 84.5, 19.99]"
+      ],
+      "hint": "let name = [a, b, c]"
+     }
+    ]
+   },
+   {
+    "id": "l7",
+    "title": "Loops",
+    "buildNote": "It now works out a tip for every bill in the list.",
+    "steps": [
+     {
+      "id": "l7s1",
+      "kind": "learn",
+      "title": "Repeating things",
+      "body": "A **for loop** runs code once for each item in a collection.",
+      "code": "let names = [\"Sam\", \"Alex\"]\nfor name in names {\n    print(\"Hi \\(name)\")\n}"
+     },
+     {
+      "id": "l7s2",
+      "kind": "reorder",
+      "title": "Build the loop",
+      "body": "Put the loop in order. The lines inside the braces run once per bill.",
+      "lines": [
+       "for bill in bills {",
+       "    let tip = calculateTip(bill: bill, percent: percent)",
+       "    print(\"Tip: $\\(tip)\")",
+       "}"
+      ]
+     },
+     {
+      "id": "l7s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a `for` loop over `bills` that prints each `bill`. Call the current item `bill`.",
+      "answers": [
+       "for bill in bills {\n    print(bill)\n}"
+      ],
+      "hint": "for item in collection { ... }"
+     }
+    ]
+   },
+   {
+    "id": "l8",
+    "title": "Structs",
+    "buildNote": "Each bill is now a meal with a name and a price.",
+    "steps": [
+     {
+      "id": "l8s1",
+      "kind": "learn",
+      "title": "Your own types",
+      "body": "A **struct** bundles related values into a type of your own. Create one by calling it with a value for each property.",
+      "code": "struct Meal {\n    let name: String\n    let price: Double\n}\n\nlet pasta = Meal(name: \"Pasta\", price: 24.0)\nprint(pasta.name)"
+     },
+     {
+      "id": "l8s2",
+      "kind": "reorder",
+      "title": "Build the struct",
+      "body": "Put the struct in order.",
+      "lines": [
+       "struct Meal {",
+       "    let name: String",
+       "    let price: Double",
+       "}"
+      ]
+     },
+     {
+      "id": "l8s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "`Meal` is already defined. Create a `Meal` called `steak` with the name `Steak` and the price `38.5`.",
+      "answers": [
+       "let steak = Meal(name: \"Steak\", price: 38.5)",
+       "let steak = Meal(name: \"Steak\", price: 38.50)"
+      ],
+      "hint": "Meal(name: ..., price: ...)"
+     }
+    ]
+   },
+   {
+    "id": "l9",
+    "title": "Optionals",
+    "buildNote": "Missing ratings no longer break your calculator.",
+    "steps": [
+     {
+      "id": "l9s1",
+      "kind": "learn",
+      "title": "Maybe a value",
+      "body": "An **optional** might hold a value or be empty (`nil`). Add `?` to the type to make one. Use `??` to give it a default.",
+      "code": "let rating: Int? = nil\nlet safe = rating ?? 3\nprint(safe)"
+     },
+     {
+      "id": "l9s2",
+      "kind": "gapFill",
+      "title": "Give it a default",
+      "body": "If `rating` is empty, use 3. Fill in the operator that provides a default.",
+      "code": "let safe = rating ___ 3",
+      "options": [
+       "??",
+       "?",
+       "!",
+       "||"
+      ],
+      "answers": [
+       "??"
+      ]
+     },
+     {
+      "id": "l9s3",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "A plain `Int` can't be empty. Make `rating` an optional.",
+      "code": "let rating: Int = nil",
+      "answers": [
+       "let rating: Int? = nil"
+      ],
+      "hint": "Add a ? after the type."
+     }
+    ]
+   },
+   {
+    "id": "l10",
+    "title": "Formatting output",
+    "buildNote": "Tips now print as tidy dollar amounts.",
+    "steps": [
+     {
+      "id": "l10s1",
+      "kind": "learn",
+      "title": "Tidy numbers",
+      "body": "`String(format:)` (from Foundation) formats numbers. `%.2f` means a decimal number with 2 digits after the point.",
+      "code": "import Foundation\n\nlet tip = 12.675\nprint(String(format: \"%.2f\", tip))"
+     },
+     {
+      "id": "l10s2",
+      "kind": "gapFill",
+      "title": "How many decimals?",
+      "body": "Fill in the blank to show **2** decimal places.",
+      "code": "String(format: \"%.___f\", tip)",
+      "options": [
+       "2",
+       "0",
+       "f",
+       "$"
+      ],
+      "answers": [
+       "2"
+      ]
+     },
+     {
+      "id": "l10s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Print `tip` with 2 decimal places, using `String(format:)`.",
+      "answers": [
+       "print(String(format: \"%.2f\", tip))"
+      ],
+      "hint": "String(format: \"%.2f\", value)"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "swift-project-habit",
+  "language": "swift",
+  "kind": "project",
+  "title": "Project: Habit Counter",
+  "subtitle": "Build a real SwiftUI screen with a tappable counter. You can paste the finished code straight into your own app.",
+  "capstone": "Habit Counter",
+  "capstoneCode": "import SwiftUI\n\nstruct HabitCounter: View {\n    @State private var count = 0\n    let habit = \"Drink water\"\n\n    var body: some View {\n        VStack(spacing: 16) {\n            Text(habit)\n                .font(.title)\n            Text(\"\\(count) today\")\n                .font(.largeTitle)\n            Button(\"Done!\") {\n                count += 1\n            }\n            .buttonStyle(.borderedProminent)\n        }\n        .padding()\n    }\n}",
+  "lessons": [
+   {
+    "id": "sp1",
+    "title": "Your first view",
+    "buildNote": "You have a SwiftUI screen that shows some text.",
+    "steps": [
+     {
+      "id": "sp1s1",
+      "kind": "learn",
+      "title": "A screen is a struct",
+      "body": "In SwiftUI, a screen is a **struct** that follows `View` and describes what to show in `body`.",
+      "code": "import SwiftUI\n\nstruct HabitCounter: View {\n    var body: some View {\n        Text(\"Drink water\")\n    }\n}"
+     },
+     {
+      "id": "sp1s2",
+      "kind": "reorder",
+      "title": "Build the view",
+      "body": "Put the view in order.",
+      "lines": [
+       "struct HabitCounter: View {",
+       "    var body: some View {",
+       "        Text(\"Drink water\")",
+       "    }",
+       "}"
+      ]
+     },
+     {
+      "id": "sp1s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a `Text` view that shows `Drink water`.",
+      "answers": [
+       "Text(\"Drink water\")"
+      ],
+      "hint": "Text(\"...\")"
+     }
+    ]
+   },
+   {
+    "id": "sp2",
+    "title": "Stacking views",
+    "buildNote": "Your screen now stacks two pieces of text.",
+    "steps": [
+     {
+      "id": "sp2s1",
+      "kind": "learn",
+      "title": "Stacks",
+      "body": "A `VStack` stacks views vertically, and `spacing` sets the gap between them.",
+      "code": "VStack(spacing: 16) {\n    Text(\"Drink water\")\n    Text(\"0 today\")\n}"
+     },
+     {
+      "id": "sp2s2",
+      "kind": "gapFill",
+      "title": "Stack them",
+      "body": "Fill in the container that stacks views **vertically**.",
+      "code": "___(spacing: 16) {\n    Text(\"Drink water\")\n    Text(\"0 today\")\n}",
+      "options": [
+       "VStack",
+       "HStack",
+       "Text",
+       "List"
+      ],
+      "answers": [
+       "VStack"
+      ]
+     },
+     {
+      "id": "sp2s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Wrap `Text(\"Drink water\")` in a `VStack` with a `spacing` of `16`.",
+      "answers": [
+       "VStack(spacing: 16) {\n    Text(\"Drink water\")\n}"
+      ],
+      "hint": "VStack(spacing: ...) { ... }"
+     }
+    ]
+   },
+   {
+    "id": "sp3",
+    "title": "Remembering a number",
+    "buildNote": "Your screen can now remember a count.",
+    "steps": [
+     {
+      "id": "sp3s1",
+      "kind": "learn",
+      "title": "State",
+      "body": "`@State` lets a view remember a value and redraw itself whenever it changes. Inside text, `\\( )` drops a value into a string.",
+      "code": "@State private var count = 0\n\nText(\"\\(count) today\")"
+     },
+     {
+      "id": "sp3s2",
+      "kind": "gapFill",
+      "title": "Remember it",
+      "body": "Fill in the attribute that lets a view remember a changing value.",
+      "code": "@___ private var count = 0",
+      "options": [
+       "State",
+       "Binding",
+       "Published",
+       "Environment"
+      ],
+      "answers": [
+       "State"
+      ]
+     },
+     {
+      "id": "sp3s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Create a state property called `count` that starts at `0`.",
+      "answers": [
+       "@State private var count = 0"
+      ],
+      "hint": "Start with @State"
+     }
+    ]
+   },
+   {
+    "id": "sp4",
+    "title": "A button",
+    "buildNote": "Tapping the button now adds to the count.",
+    "steps": [
+     {
+      "id": "sp4s1",
+      "kind": "learn",
+      "title": "Buttons",
+      "body": "A `Button` takes a title and some code to run when it's tapped. Changing a `@State` value redraws the screen automatically.",
+      "code": "Button(\"Done!\") {\n    count += 1\n}"
+     },
+     {
+      "id": "sp4s2",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "The button should add 1 to `count`, but this only calculates a number and throws it away. Fix it.",
+      "code": "Button(\"Done!\") {\n    count + 1\n}",
+      "answers": [
+       "Button(\"Done!\") {\n    count += 1\n}"
+      ],
+      "hint": "Use += to change the value."
+     },
+     {
+      "id": "sp4s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a `Text` that shows the count like `3 today`, using `count` inside the string.",
+      "answers": [
+       "Text(\"\\(count) today\")"
+      ],
+      "hint": "Text(\"\\(value) today\")"
+     }
+    ]
+   },
+   {
+    "id": "sp5",
+    "title": "Make it look good",
+    "buildNote": "Your habit counter is finished and looks great.",
+    "steps": [
+     {
+      "id": "sp5s1",
+      "kind": "learn",
+      "title": "Modifiers",
+      "body": "**Modifiers** change how a view looks. Add them after the view with a dot, like `.font(.title)`. Your finished screen is ready to paste into your own app.",
+      "code": "Text(\"Drink water\")\n    .font(.title)\n\nButton(\"Done!\") { count += 1 }\n    .buttonStyle(.borderedProminent)"
+     },
+     {
+      "id": "sp5s2",
+      "kind": "gapFill",
+      "title": "Change the font",
+      "body": "Fill in the modifier that changes the text size and style.",
+      "code": "Text(\"Drink water\")\n    .___(.title)",
+      "options": [
+       "font",
+       "padding",
+       "style",
+       "size"
+      ],
+      "answers": [
+       "font"
+      ]
+     },
+     {
+      "id": "sp5s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write the modifier that adds space around a view.",
+      "answers": [
+       ".padding()"
+      ],
+      "hint": "It has no arguments."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "python-foundations",
+  "language": "python",
+  "title": "Python Foundations",
+  "subtitle": "Learn the basics by building a tip calculator, one piece at a time.",
+  "capstone": "Tip Calculator",
+  "capstoneCode": "def calculate_tip(bill, percent=0.10):\n    tip = bill * percent\n    return tip\n\nrating = 5\npercent = 0.10\nif rating >= 4:\n    percent = 0.20\n\nmeals = {\"Pasta\": 24.0, \"Steak\": 38.5}\nfor name, price in meals.items():\n    tip = calculate_tip(price, percent)\n    print(f\"{name}: tip ${tip:.2f}\")",
+  "lessons": [
+   {
+    "id": "p1",
+    "title": "Variables",
+    "buildNote": "Your calculator now stores the bill amount.",
+    "steps": [
+     {
+      "id": "p1s1",
+      "kind": "learn",
+      "title": "Variables in Python",
+      "body": "A **variable** stores a value. In Python you write a name, `=`, then the value. No keyword needed.",
+      "code": "bill_amount = 84.50\nprint(bill_amount)"
+     },
+     {
+      "id": "p1s2",
+      "kind": "gapFill",
+      "title": "Name it",
+      "body": "Fill in the blank so the variable is called `bill_amount`.",
+      "code": "___ = 84.50",
+      "options": [
+       "bill_amount",
+       "print",
+       "def",
+       "84.50"
+      ],
+      "answers": [
+       "bill_amount"
+      ]
+     },
+     {
+      "id": "p1s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Create a variable named `bill_amount` set to `84.50`.",
+      "answers": [
+       "bill_amount = 84.50",
+       "bill_amount = 84.5"
+      ],
+      "hint": "Name, equals sign, value."
+     }
+    ]
+   },
+   {
+    "id": "p2",
+    "title": "Numbers & maths",
+    "buildNote": "It can now work out a tip from a percentage.",
+    "steps": [
+     {
+      "id": "p2s1",
+      "kind": "learn",
+      "title": "Maths in Python",
+      "body": "Python uses `+`, `-`, `*` and `/`. Multiply the bill by the tip percentage to get the tip.",
+      "code": "total = 50.0 * 0.2"
+     },
+     {
+      "id": "p2s2",
+      "kind": "reorder",
+      "title": "Order matters",
+      "body": "Put the lines in order. A variable must exist before you use it.",
+      "lines": [
+       "bill_amount = 84.50",
+       "tip_percent = 0.15",
+       "tip = bill_amount * tip_percent"
+      ]
+     },
+     {
+      "id": "p2s3",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "The tip should be the bill **multiplied** by the percentage. Fix the code.",
+      "code": "tip_percent = 0.15\ntip = bill_amount + tip_percent",
+      "answers": [
+       "tip_percent = 0.15\ntip = bill_amount * tip_percent"
+      ],
+      "hint": "Which operator multiplies?"
+     }
+    ]
+   },
+   {
+    "id": "p3",
+    "title": "Text & print",
+    "buildNote": "It now prints a friendly result.",
+    "steps": [
+     {
+      "id": "p3s1",
+      "kind": "learn",
+      "title": "f-strings",
+      "body": "Put a value inside text with an **f-string**: start the text with `f` and wrap the value in `{ }`.",
+      "code": "name = \"Sam\"\nprint(f\"Hi {name}\")"
+     },
+     {
+      "id": "p3s2",
+      "kind": "gapFill",
+      "title": "Show the tip",
+      "body": "Fill in the blank so the message shows the tip.",
+      "code": "print(f\"Tip: ${___}\")",
+      "options": [
+       "tip",
+       "bill_amount",
+       "print",
+       "f"
+      ],
+      "answers": [
+       "tip"
+      ]
+     },
+     {
+      "id": "p3s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Print `Tip: $` followed by the `tip` value using an f-string.",
+      "answers": [
+       "print(f\"Tip: ${tip}\")"
+      ],
+      "hint": "print(f\"... {value}\")"
+     }
+    ]
+   },
+   {
+    "id": "p4",
+    "title": "Functions",
+    "buildNote": "Your calculator is now reusable with a function.",
+    "steps": [
+     {
+      "id": "p4s1",
+      "kind": "learn",
+      "title": "Reusable code",
+      "body": "A **function** packages code you can run again. Use `def`, a name, parameters and a colon, then an **indented** body.",
+      "code": "def double(n):\n    return n * 2\n\nprint(double(4))"
+     },
+     {
+      "id": "p4s2",
+      "kind": "reorder",
+      "title": "Build the function",
+      "body": "Put the function in order. The indented lines belong to the function.",
+      "lines": [
+       "def calculate_tip(bill, percent):",
+       "    tip = bill * percent",
+       "    return tip"
+      ]
+     },
+     {
+      "id": "p4s3",
+      "kind": "write",
+      "title": "Call it",
+      "body": "Create a variable `tip` by calling `calculate_tip` with `bill_amount` and `0.15`.",
+      "answers": [
+       "tip = calculate_tip(bill_amount, 0.15)"
+      ],
+      "hint": "Call it like double(4), but with two values."
+     }
+    ]
+   },
+   {
+    "id": "p5",
+    "title": "Decisions",
+    "buildNote": "Your calculator now picks the tip size from a rating.",
+    "steps": [
+     {
+      "id": "p5s1",
+      "kind": "learn",
+      "title": "Making decisions",
+      "body": "An `if` runs code only when its condition is true. It ends with a **colon**, and the code inside is **indented**.",
+      "code": "rating = 5\nif rating >= 4:\n    print(\"Great service!\")"
+     },
+     {
+      "id": "p5s2",
+      "kind": "gapFill",
+      "title": "Pick the condition",
+      "body": "Great service (a rating of **4 or more**) earns the bigger tip. Fill in the operator.",
+      "code": "if rating ___ 4:\n    percent = 0.20",
+      "options": [
+       ">=",
+       "==",
+       "=",
+       "<"
+      ],
+      "answers": [
+       ">="
+      ]
+     },
+     {
+      "id": "p5s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write an `if` statement that sets `percent` to `0.20` when `rating` is 4 or more.",
+      "answers": [
+       "if rating >= 4:\n    percent = 0.20",
+       "if rating >= 4:\n    percent = 0.2"
+      ],
+      "hint": "Don't forget the colon and the indent."
+     }
+    ]
+   },
+   {
+    "id": "p6",
+    "title": "Lists",
+    "buildNote": "It can now hold a whole list of bills.",
+    "steps": [
+     {
+      "id": "p6s1",
+      "kind": "learn",
+      "title": "Lists of values",
+      "body": "A **list** holds several values in order. Use square brackets and commas. Counting starts at **0**, and `len()` tells you how many items there are.",
+      "code": "bills = [42.0, 84.50, 19.99]\nprint(bills[0])\nprint(len(bills))"
+     },
+     {
+      "id": "p6s2",
+      "kind": "gapFill",
+      "title": "Get the first bill",
+      "body": "Lists count from 0. Fill in the blank to get the **first** bill.",
+      "code": "first = bills[___]",
+      "options": [
+       "0",
+       "1",
+       "3",
+       "first"
+      ],
+      "answers": [
+       "0"
+      ]
+     },
+     {
+      "id": "p6s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Create a variable named `bills` holding `42.0`, `84.50` and `19.99`.",
+      "answers": [
+       "bills = [42.0, 84.50, 19.99]",
+       "bills = [42.0, 84.5, 19.99]",
+       "bills = [42, 84.50, 19.99]",
+       "bills = [42, 84.5, 19.99]"
+      ],
+      "hint": "name = [a, b, c]"
+     }
+    ]
+   },
+   {
+    "id": "p7",
+    "title": "Loops",
+    "buildNote": "It now works out a tip for every bill in the list.",
+    "steps": [
+     {
+      "id": "p7s1",
+      "kind": "learn",
+      "title": "Repeating things",
+      "body": "A **for loop** runs code once for each item in a collection. Like `if`, it ends with a colon and indents its body.",
+      "code": "names = [\"Sam\", \"Alex\"]\nfor name in names:\n    print(f\"Hi {name}\")"
+     },
+     {
+      "id": "p7s2",
+      "kind": "reorder",
+      "title": "Build the loop",
+      "body": "Put the loop in order. The indented lines run once per bill.",
+      "lines": [
+       "for bill in bills:",
+       "    tip = calculate_tip(bill, percent)",
+       "    print(f\"Tip: ${tip}\")"
+      ]
+     },
+     {
+      "id": "p7s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a `for` loop over `bills` that prints each `bill`. Call the current item `bill`.",
+      "answers": [
+       "for bill in bills:\n    print(bill)"
+      ],
+      "hint": "for item in collection:"
+     }
+    ]
+   },
+   {
+    "id": "p8",
+    "title": "Dictionaries",
+    "buildNote": "Each bill now has a name attached.",
+    "steps": [
+     {
+      "id": "p8s1",
+      "kind": "learn",
+      "title": "Pairs of values",
+      "body": "A **dictionary** stores pairs: a key and its value. Look a value up by its key.",
+      "code": "meals = {\"Pasta\": 24.0, \"Steak\": 38.5}\nprint(meals[\"Pasta\"])"
+     },
+     {
+      "id": "p8s2",
+      "kind": "gapFill",
+      "title": "Look it up",
+      "body": "Fill in the blank to get the price of the steak.",
+      "code": "print(meals[___])",
+      "options": [
+       "\"Steak\"",
+       "\"Pasta\"",
+       "0",
+       "meals"
+      ],
+      "answers": [
+       "\"Steak\""
+      ]
+     },
+     {
+      "id": "p8s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Create a dictionary named `meals` with `Pasta` costing `24.0` and `Steak` costing `38.5`.",
+      "answers": [
+       "meals = {\"Pasta\": 24.0, \"Steak\": 38.5}",
+       "meals = {\"Pasta\": 24.0, \"Steak\": 38.50}",
+       "meals = {\"Pasta\": 24, \"Steak\": 38.5}",
+       "meals = {\"Pasta\": 24, \"Steak\": 38.50}",
+       "meals = {'Pasta': 24.0, 'Steak': 38.5}",
+       "meals = {'Pasta': 24.0, 'Steak': 38.50}",
+       "meals = {'Pasta': 24, 'Steak': 38.5}",
+       "meals = {'Pasta': 24, 'Steak': 38.50}"
+      ],
+      "hint": "name = {\"key\": value, \"key\": value}"
+     }
+    ]
+   },
+   {
+    "id": "p9",
+    "title": "Formatting numbers",
+    "buildNote": "Tips now print as tidy dollar amounts.",
+    "steps": [
+     {
+      "id": "p9s1",
+      "kind": "learn",
+      "title": "Tidy numbers",
+      "body": "In an f-string, add `:.2f` after a value to show exactly 2 decimal places.",
+      "code": "tip = 12.675\nprint(f\"Tip: ${tip:.2f}\")"
+     },
+     {
+      "id": "p9s2",
+      "kind": "gapFill",
+      "title": "How many decimals?",
+      "body": "Fill in the blank to show 2 decimal places.",
+      "code": "print(f\"Tip: ${tip:___}\")",
+      "options": [
+       ".2f",
+       ".2",
+       ".f",
+       "2f"
+      ],
+      "answers": [
+       ".2f"
+      ]
+     },
+     {
+      "id": "p9s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Print `Tip: $` followed by `tip` with 2 decimal places, using an f-string.",
+      "answers": [
+       "print(f\"Tip: ${tip:.2f}\")"
+      ],
+      "hint": "Use {tip:.2f} inside the f-string."
+     }
+    ]
+   },
+   {
+    "id": "p10",
+    "title": "Default values",
+    "buildNote": "Calculating a tip now works without choosing a percentage.",
+    "steps": [
+     {
+      "id": "p10s1",
+      "kind": "learn",
+      "title": "Defaults",
+      "body": "A parameter can have a **default value**. If the caller leaves it out, the default is used.",
+      "code": "def calculate_tip(bill, percent=0.10):\n    tip = bill * percent\n    return tip\n\nprint(calculate_tip(50))"
+     },
+     {
+      "id": "p10s2",
+      "kind": "reorder",
+      "title": "Build the function",
+      "body": "Put the function in order.",
+      "lines": [
+       "def calculate_tip(bill, percent=0.10):",
+       "    tip = bill * percent",
+       "    return tip"
+      ]
+     },
+     {
+      "id": "p10s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Print the result of calling `calculate_tip` for a bill of `50`, without giving a percentage.",
+      "answers": [
+       "print(calculate_tip(50))",
+       "print(calculate_tip(50.0))"
+      ],
+      "hint": "Pass only the bill."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "python-project-quiz",
+  "language": "python",
+  "kind": "project",
+  "title": "Project: Quiz Game",
+  "subtitle": "Build a real quiz that runs in the terminal. Save the finished code as quiz.py and run it with python quiz.py.",
+  "capstone": "Quiz Game",
+  "capstoneCode": "questions = [\n    {\"question\": \"What is 7 x 8?\", \"answer\": \"56\"},\n    {\"question\": \"What is the capital of Australia?\", \"answer\": \"canberra\"},\n    {\"question\": \"How many days are in a leap year?\", \"answer\": \"366\"},\n]\n\ndef ask(question, answer):\n    reply = input(question + \" \").strip().lower()\n    return reply == answer\n\nscore = 0\nfor item in questions:\n    if ask(item[\"question\"], item[\"answer\"]):\n        print(\"Correct!\")\n        score += 1\n    else:\n        print(\"Not quite. The answer was \" + item[\"answer\"])\n\nprint(f\"You scored {score} out of {len(questions)}\")",
+  "lessons": [
+   {
+    "id": "pp1",
+    "title": "The questions",
+    "buildNote": "Your quiz has questions stored as data.",
+    "steps": [
+     {
+      "id": "pp1s1",
+      "kind": "learn",
+      "title": "Questions as data",
+      "body": "A quiz is just a **list** of questions, and each question is a **dictionary** with a `question` and an `answer`. Keeping questions as data means you can add more without changing any logic.",
+      "code": "questions = [\n    {\"question\": \"What is 7 x 8?\", \"answer\": \"56\"},\n    {\"question\": \"What is the capital of Australia?\", \"answer\": \"canberra\"},\n]\nprint(questions[0][\"question\"])"
+     },
+     {
+      "id": "pp1s2",
+      "kind": "gapFill",
+      "title": "Get the first question",
+      "body": "Lists count from 0. Fill in the blank to get the **first** question.",
+      "code": "print(questions[___][\"question\"])",
+      "options": [
+       "0",
+       "1",
+       "question",
+       "answer"
+      ],
+      "answers": [
+       "0"
+      ]
+     },
+     {
+      "id": "pp1s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Create a list named `questions` holding one dictionary: the question `What is 7 x 8?` and the answer `56`.",
+      "answers": [
+       "questions = [{\"question\": \"What is 7 x 8?\", \"answer\": \"56\"}]",
+       "questions = [{'question': 'What is 7 x 8?', 'answer': '56'}]"
+      ],
+      "hint": "A list of dictionaries: [{\"key\": \"value\"}]"
+     }
+    ]
+   },
+   {
+    "id": "pp2",
+    "title": "Ask a question",
+    "buildNote": "Your quiz can ask a question and read the answer.",
+    "steps": [
+     {
+      "id": "pp2s1",
+      "kind": "learn",
+      "title": "Asking the player",
+      "body": "`input()` shows a prompt and returns what the player typed, as text. `.strip()` removes extra spaces and `.lower()` makes it lowercase, so `Canberra ` still matches `canberra`.",
+      "code": "reply = input(\"What is 7 x 8? \").strip().lower()\nprint(reply)"
+     },
+     {
+      "id": "pp2s2",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "Methods need parentheses to run. Fix the two methods.",
+      "code": "reply = input(\"What is 7 x 8? \").strip.lower",
+      "answers": [
+       "reply = input(\"What is 7 x 8? \").strip().lower()",
+       "reply = input('What is 7 x 8? ').strip().lower()"
+      ],
+      "hint": "Methods need parentheses ()"
+     },
+     {
+      "id": "pp2s3",
+      "kind": "reorder",
+      "title": "Wrap it in a function",
+      "body": "Put the function in order. It asks the question, then returns whether the reply matches.",
+      "lines": [
+       "def ask(question, answer):",
+       "    reply = input(question + \" \").strip().lower()",
+       "    return reply == answer"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "pp3",
+    "title": "Right or wrong?",
+    "buildNote": "Your quiz now tells the player if they got it right.",
+    "steps": [
+     {
+      "id": "pp3s1",
+      "kind": "learn",
+      "title": "Comparing answers",
+      "body": "`==` compares two values and gives `True` or `False`. An `if` / `else` then picks what to do.",
+      "code": "if reply == answer:\n    print(\"Correct!\")\nelse:\n    print(\"Not quite.\")"
+     },
+     {
+      "id": "pp3s2",
+      "kind": "gapFill",
+      "title": "Compare them",
+      "body": "Fill in the operator that checks whether two values are **equal**.",
+      "code": "if reply ___ answer:",
+      "options": [
+       "==",
+       "=",
+       "!=",
+       ">"
+      ],
+      "answers": [
+       "=="
+      ]
+     },
+     {
+      "id": "pp3s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write an `if`/`else` that prints `Correct!` when `reply == answer`, and `Not quite.` otherwise.",
+      "answers": [
+       "if reply == answer:\n    print(\"Correct!\")\nelse:\n    print(\"Not quite.\")",
+       "if reply == answer:\n    print('Correct!')\nelse:\n    print('Not quite.')"
+      ],
+      "hint": "Don't forget the colons and the indents."
+     }
+    ]
+   },
+   {
+    "id": "pp4",
+    "title": "Keep score",
+    "buildNote": "Your quiz now counts the player's points.",
+    "steps": [
+     {
+      "id": "pp4s1",
+      "kind": "learn",
+      "title": "Looping with a score",
+      "body": "`score = 0` starts the count, and `score += 1` adds 1 to it. A `for` loop asks every question in the list.",
+      "code": "score = 0\nfor item in questions:\n    if ask(item[\"question\"], item[\"answer\"]):\n        score += 1"
+     },
+     {
+      "id": "pp4s2",
+      "kind": "reorder",
+      "title": "Build the loop",
+      "body": "Put the lines in order.",
+      "lines": [
+       "score = 0",
+       "for item in questions:",
+       "    if ask(item[\"question\"], item[\"answer\"]):",
+       "        print(\"Correct!\")",
+       "        score += 1"
+      ]
+     },
+     {
+      "id": "pp4s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Add `1` to `score` using `+=`.",
+      "answers": [
+       "score += 1"
+      ],
+      "hint": "score += 1"
+     }
+    ]
+   },
+   {
+    "id": "pp5",
+    "title": "Show the result",
+    "buildNote": "Your quiz is finished. Run it and play!",
+    "steps": [
+     {
+      "id": "pp5s1",
+      "kind": "learn",
+      "title": "The final score",
+      "body": "`len()` counts how many items are in a list, and an f-string drops values into text. Save the finished program as `quiz.py` and run it with `python quiz.py`.",
+      "code": "print(f\"You scored {score} out of {len(questions)}\")"
+     },
+     {
+      "id": "pp5s2",
+      "kind": "gapFill",
+      "title": "Count the questions",
+      "body": "Fill in the function that counts the items in a list.",
+      "code": "print(f\"You scored {score} out of {___(questions)}\")",
+      "options": [
+       "len",
+       "count",
+       "size",
+       "sum"
+      ],
+      "answers": [
+       "len"
+      ]
+     },
+     {
+      "id": "pp5s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Print the score and the number of questions as `You scored 2 out of 3`, using an f-string with `score` and `len(questions)`.",
+      "answers": [
+       "print(f\"You scored {score} out of {len(questions)}\")",
+       "print(f'You scored {score} out of {len(questions)}')"
+      ],
+      "hint": "print(f\"... {score} ... {len(questions)}\")"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "html-foundations",
+  "language": "html",
+  "title": "HTML Foundations",
+  "subtitle": "Learn the basics by building your own web page, one piece at a time.",
+  "capstone": "Personal Web Page",
+  "capstoneCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>My Page</title>\n  <style>\n    h1 {\n      color: royalblue;\n    }\n  </style>\n</head>\n<body>\n  <header>\n    <h1>Hi, I'm Sam</h1>\n  </header>\n  <main>\n    <p>I am learning to <strong>build</strong> things.</p>\n    <img src=\"me.jpg\" alt=\"A photo of me\">\n    <h2>My favourites</h2>\n    <ul>\n      <li>Coding</li>\n      <li>Coffee</li>\n    </ul>\n    <table>\n      <tr>\n        <th>Skill</th>\n        <th>Level</th>\n      </tr>\n      <tr>\n        <td>HTML</td>\n        <td>Learning</td>\n      </tr>\n    </table>\n    <a href=\"https://example.com\">My site</a>\n    <form>\n      <input type=\"email\" placeholder=\"Your email\">\n      <button>Say hi</button>\n    </form>\n  </main>\n  <footer>\n    <p>Made with BuildPath</p>\n  </footer>\n</body>\n</html>",
+  "lessons": [
+   {
+    "id": "h1",
+    "title": "Page skeleton",
+    "buildNote": "Your page now has a proper structure.",
+    "steps": [
+     {
+      "id": "h1s1",
+      "kind": "learn",
+      "title": "Every page has a skeleton",
+      "body": "HTML is made of **tags** like `<html>`. Most come in pairs: an opening tag and a closing tag with a `/`. `<head>` holds info about the page, and `<body>` holds what people see.",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <title>My Page</title>\n</head>\n<body>\n</body>\n</html>"
+     },
+     {
+      "id": "h1s2",
+      "kind": "reorder",
+      "title": "Build the skeleton",
+      "body": "Put the lines in order. Opening tags come before the things inside them.",
+      "lines": [
+       "<!DOCTYPE html>",
+       "<html lang=\"en\">",
+       "<head>",
+       "  <title>My Page</title>",
+       "</head>",
+       "<body>",
+       "</body>",
+       "</html>"
+      ]
+     },
+     {
+      "id": "h1s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write the `<title>` tag for a page called `My Page`.",
+      "answers": [
+       "<title>My Page</title>"
+      ],
+      "hint": "Opening tag, the text, then the closing tag with a /."
+     }
+    ]
+   },
+   {
+    "id": "h2",
+    "title": "Headings & paragraphs",
+    "buildNote": "Your page now has a heading and some text.",
+    "steps": [
+     {
+      "id": "h2s1",
+      "kind": "learn",
+      "title": "Headings and text",
+      "body": "`<h1>` is the main heading, and `<h2>` to `<h6>` are smaller ones. `<p>` is a paragraph, and `<strong>` makes text bold.",
+      "code": "<h1>Hi, I'm Sam</h1>\n<p>I am learning to <strong>build</strong> things.</p>"
+     },
+     {
+      "id": "h2s2",
+      "kind": "gapFill",
+      "title": "Pick the tag",
+      "body": "Fill both blanks with the tag for the **main heading**.",
+      "code": "<___>Hi, I'm Sam</___>",
+      "options": [
+       "h1",
+       "p",
+       "title",
+       "strong"
+      ],
+      "answers": [
+       "h1",
+       "h1"
+      ]
+     },
+     {
+      "id": "h2s3",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "Two closing tags are missing their `/`. Fix them.",
+      "code": "<h1>Hi, I'm Sam<h1>\n<p>I am learning to build things.<p>",
+      "answers": [
+       "<h1>Hi, I'm Sam</h1>\n<p>I am learning to build things.</p>"
+      ],
+      "hint": "Closing tags start with </"
+     }
+    ]
+   },
+   {
+    "id": "h3",
+    "title": "Links",
+    "buildNote": "Your page can now link to other sites.",
+    "steps": [
+     {
+      "id": "h3s1",
+      "kind": "learn",
+      "title": "Links",
+      "body": "`<a>` makes a link. The `href` attribute says where it goes, and the text between the tags is what people click.",
+      "code": "<a href=\"https://example.com\">My site</a>"
+     },
+     {
+      "id": "h3s2",
+      "kind": "gapFill",
+      "title": "Where does it go?",
+      "body": "Fill in the attribute that says where the link goes.",
+      "code": "<a ___=\"https://example.com\">My site</a>",
+      "options": [
+       "href",
+       "src",
+       "link",
+       "url"
+      ],
+      "answers": [
+       "href"
+      ]
+     },
+     {
+      "id": "h3s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a link to `https://example.com` with the text `My site`.",
+      "answers": [
+       "<a href=\"https://example.com\">My site</a>"
+      ],
+      "hint": "<a href=\"...\">text</a>"
+     }
+    ]
+   },
+   {
+    "id": "h4",
+    "title": "Lists",
+    "buildNote": "Your page now has a list of favourites.",
+    "steps": [
+     {
+      "id": "h4s1",
+      "kind": "learn",
+      "title": "Lists",
+      "body": "`<ul>` makes a bulleted list and `<ol>` a numbered one. Each item goes in its own `<li>`.",
+      "code": "<ul>\n  <li>Coding</li>\n  <li>Coffee</li>\n</ul>"
+     },
+     {
+      "id": "h4s2",
+      "kind": "reorder",
+      "title": "Build the list",
+      "body": "Put the list in order.",
+      "lines": [
+       "<ul>",
+       "  <li>Coding</li>",
+       "  <li>Coffee</li>",
+       "</ul>"
+      ]
+     },
+     {
+      "id": "h4s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a bulleted list with two items: `Coding` and `Coffee`.",
+      "answers": [
+       "<ul>\n  <li>Coding</li>\n  <li>Coffee</li>\n</ul>"
+      ],
+      "hint": "The <ul> wraps the <li> items."
+     }
+    ]
+   },
+   {
+    "id": "h5",
+    "title": "Images",
+    "buildNote": "Your page can now show a picture.",
+    "steps": [
+     {
+      "id": "h5s1",
+      "kind": "learn",
+      "title": "Images",
+      "body": "`<img>` shows a picture. `src` is the file's location, and `alt` describes the picture for screen readers and for when it fails to load. It has no closing tag.",
+      "code": "<img src=\"me.jpg\" alt=\"A photo of me\">"
+     },
+     {
+      "id": "h5s2",
+      "kind": "gapFill",
+      "title": "Describe it",
+      "body": "Which attribute describes the image for people who can't see it?",
+      "code": "<img src=\"me.jpg\" ___=\"A photo of me\">",
+      "options": [
+       "alt",
+       "href",
+       "title",
+       "name"
+      ],
+      "answers": [
+       "alt"
+      ]
+     },
+     {
+      "id": "h5s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write an image tag with `src` set to `me.jpg` and `alt` set to `A photo of me`.",
+      "answers": [
+       "<img src=\"me.jpg\" alt=\"A photo of me\">",
+       "<img alt=\"A photo of me\" src=\"me.jpg\">"
+      ],
+      "hint": "No closing tag needed."
+     }
+    ]
+   },
+   {
+    "id": "h6",
+    "title": "Page layout",
+    "buildNote": "Your page is now organised into header, main and footer.",
+    "steps": [
+     {
+      "id": "h6s1",
+      "kind": "learn",
+      "title": "Describing the layout",
+      "body": "`<header>`, `<main>` and `<footer>` don't change how a page looks, but they describe its layout to screen readers and search engines.",
+      "code": "<header>\n  <h1>Hi, I'm Sam</h1>\n</header>\n<main>\n  <p>Welcome!</p>\n</main>"
+     },
+     {
+      "id": "h6s2",
+      "kind": "reorder",
+      "title": "Build the layout",
+      "body": "Put the lines in order.",
+      "lines": [
+       "<header>",
+       "  <h1>Hi, I'm Sam</h1>",
+       "</header>",
+       "<main>",
+       "  <p>Welcome!</p>",
+       "</main>"
+      ]
+     },
+     {
+      "id": "h6s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Wrap the paragraph in a `<footer>` tag.",
+      "code": "<p>Made with BuildPath</p>",
+      "answers": [
+       "<footer>\n  <p>Made with BuildPath</p>\n</footer>"
+      ],
+      "hint": "Put <footer> before it and </footer> after it."
+     }
+    ]
+   },
+   {
+    "id": "h7",
+    "title": "Forms & buttons",
+    "buildNote": "Visitors can now type their email and say hi.",
+    "steps": [
+     {
+      "id": "h7s1",
+      "kind": "learn",
+      "title": "Forms",
+      "body": "`<form>` groups inputs together. `<input type=\"email\">` is an email box (`placeholder` shows a hint), and `<button>` makes a button.",
+      "code": "<form>\n  <input type=\"email\" placeholder=\"Your email\">\n  <button>Say hi</button>\n</form>"
+     },
+     {
+      "id": "h7s2",
+      "kind": "gapFill",
+      "title": "Pick the input type",
+      "body": "Which type gives you an email box?",
+      "code": "<input type=\"___\" placeholder=\"Your email\">",
+      "options": [
+       "email",
+       "text",
+       "submit",
+       "button"
+      ],
+      "answers": [
+       "email"
+      ]
+     },
+     {
+      "id": "h7s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a form containing one email input (placeholder `Your email`) and a button that says `Say hi`.",
+      "answers": [
+       "<form>\n  <input type=\"email\" placeholder=\"Your email\">\n  <button>Say hi</button>\n</form>",
+       "<form>\n  <input placeholder=\"Your email\" type=\"email\">\n  <button>Say hi</button>\n</form>"
+      ],
+      "hint": "The form wraps both the input and the button."
+     }
+    ]
+   },
+   {
+    "id": "h8",
+    "title": "Tables",
+    "buildNote": "Your page now shows a small table of skills.",
+    "steps": [
+     {
+      "id": "h8s1",
+      "kind": "learn",
+      "title": "Tables",
+      "body": "`<table>` makes a grid. Each row is a `<tr>`. Use `<th>` for a header cell and `<td>` for a normal cell.",
+      "code": "<table>\n  <tr>\n    <th>Skill</th>\n    <th>Level</th>\n  </tr>\n  <tr>\n    <td>HTML</td>\n    <td>Learning</td>\n  </tr>\n</table>"
+     },
+     {
+      "id": "h8s2",
+      "kind": "reorder",
+      "title": "Build the header row",
+      "body": "Put the table in order.",
+      "lines": [
+       "<table>",
+       "  <tr>",
+       "    <th>Skill</th>",
+       "    <th>Level</th>",
+       "  </tr>",
+       "</table>"
+      ]
+     },
+     {
+      "id": "h8s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write one table row (`<tr>`) with two normal cells: `HTML` and `Learning`.",
+      "answers": [
+       "<tr>\n  <td>HTML</td>\n  <td>Learning</td>\n</tr>"
+      ],
+      "hint": "Normal cells use <td>."
+     }
+    ]
+   },
+   {
+    "id": "h9",
+    "title": "Styling with CSS",
+    "buildNote": "Your heading now has a colour.",
+    "steps": [
+     {
+      "id": "h9s1",
+      "kind": "learn",
+      "title": "CSS",
+      "body": "**CSS** controls how things look. Put it in a `<style>` tag in the `<head>`. A rule names what to style, then lists properties in `{ }`, each ending with `;`.",
+      "code": "<style>\n  h1 {\n    color: royalblue;\n  }\n</style>"
+     },
+     {
+      "id": "h9s2",
+      "kind": "gapFill",
+      "title": "Pick the property",
+      "body": "Fill in the property that changes the text colour.",
+      "code": "h1 {\n  ___: royalblue;\n}",
+      "options": [
+       "color",
+       "font",
+       "tag",
+       "href"
+      ],
+      "answers": [
+       "color"
+      ]
+     },
+     {
+      "id": "h9s3",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "Two things are missing from this rule: a colon and a semicolon. Fix it.",
+      "code": "h1 {\n  color royalblue\n}",
+      "answers": [
+       "h1 {\n  color: royalblue;\n}"
+      ],
+      "hint": "property: value;"
+     }
+    ]
+   },
+   {
+    "id": "h10",
+    "title": "A real-world head",
+    "buildNote": "Your page now works properly on phones.",
+    "steps": [
+     {
+      "id": "h10s1",
+      "kind": "learn",
+      "title": "Two useful meta tags",
+      "body": "Almost every page's `<head>` has two `<meta>` tags: `charset` makes special characters display correctly, and `viewport` makes the page fit phone screens.",
+      "code": "<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+     },
+     {
+      "id": "h10s2",
+      "kind": "gapFill",
+      "title": "Fit the screen",
+      "body": "Which name makes the page fit phone screens?",
+      "code": "<meta name=\"___\" content=\"width=device-width, initial-scale=1\">",
+      "options": [
+       "viewport",
+       "charset",
+       "title",
+       "author"
+      ],
+      "answers": [
+       "viewport"
+      ]
+     },
+     {
+      "id": "h10s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write the `<meta>` tag that sets the character set to `utf-8`.",
+      "answers": [
+       "<meta charset=\"utf-8\">"
+      ],
+      "hint": "The attribute is called charset."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "html-project-linktree",
+  "language": "html",
+  "kind": "project",
+  "title": "Project: Link-in-bio Page",
+  "subtitle": "Build a Linktree-style page: your photo, your name and big buttons to your links. Save the finished code as index.html and open it in a browser.",
+  "capstone": "Link-in-bio Page",
+  "capstoneCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Sam's Links</title>\n  <style>\n    body {\n      font-family: sans-serif;\n      background: #f4f1ea;\n      margin: 0;\n    }\n    .card {\n      max-width: 400px;\n      margin: 0 auto;\n      padding: 32px 16px;\n      text-align: center;\n    }\n    .avatar {\n      width: 96px;\n      height: 96px;\n      border-radius: 50%;\n    }\n    .link {\n      display: block;\n      padding: 14px;\n      margin: 12px 0;\n      background: #1d3557;\n      color: white;\n      border-radius: 10px;\n      text-decoration: none;\n    }\n    .link:hover {\n      background: #457b9d;\n    }\n  </style>\n</head>\n<body>\n  <main class=\"card\">\n    <img class=\"avatar\" src=\"avatar.jpg\" alt=\"Photo of Sam\">\n    <h1>Sam Rivera</h1>\n    <p>Learning to build things, one project at a time.</p>\n    <nav>\n      <a class=\"link\" href=\"https://github.com/sam\" target=\"_blank\" rel=\"noopener\">GitHub</a>\n      <a class=\"link\" href=\"https://example.com/blog\" target=\"_blank\" rel=\"noopener\">My blog</a>\n      <a class=\"link\" href=\"mailto:sam@example.com\">Email me</a>\n    </nav>\n  </main>\n</body>\n</html>",
+  "lessons": [
+   {
+    "id": "hp1",
+    "title": "Start the page",
+    "buildNote": "You have an empty page that works on phones.",
+    "steps": [
+     {
+      "id": "hp1s1",
+      "kind": "learn",
+      "title": "The starting point",
+      "body": "A link-in-bio page is one small page with your photo, your name and big buttons to your links. Start with the skeleton, plus the two meta tags every real page needs.",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Sam's Links</title>\n</head>\n<body>\n</body>\n</html>"
+     },
+     {
+      "id": "hp1s2",
+      "kind": "reorder",
+      "title": "Build the head",
+      "body": "Put the `<head>` in order.",
+      "lines": [
+       "<head>",
+       "  <meta charset=\"utf-8\">",
+       "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+       "  <title>Sam's Links</title>",
+       "</head>"
+      ]
+     },
+     {
+      "id": "hp1s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write the `<title>` tag for the page: `Sam's Links`.",
+      "answers": [
+       "<title>Sam's Links</title>"
+      ],
+      "hint": "Opening tag, the text, then the closing tag."
+     }
+    ]
+   },
+   {
+    "id": "hp2",
+    "title": "Profile header",
+    "buildNote": "Your page now shows a photo, a name and a short bio.",
+    "steps": [
+     {
+      "id": "hp2s1",
+      "kind": "learn",
+      "title": "Photo, name and bio",
+      "body": "Put everything in a `<main>` with a `class`. A **class** is a label you can style later. Then add your photo, your name as the `<h1>` and a short bio.",
+      "code": "<main class=\"card\">\n  <img class=\"avatar\" src=\"avatar.jpg\" alt=\"Photo of Sam\">\n  <h1>Sam Rivera</h1>\n  <p>Learning to build things, one project at a time.</p>\n</main>"
+     },
+     {
+      "id": "hp2s2",
+      "kind": "gapFill",
+      "title": "Describe the photo",
+      "body": "Fill in the attribute that describes the photo for people who can't see it.",
+      "code": "<img class=\"avatar\" src=\"avatar.jpg\" ___=\"Photo of Sam\">",
+      "options": [
+       "alt",
+       "href",
+       "title",
+       "name"
+      ],
+      "answers": [
+       "alt"
+      ]
+     },
+     {
+      "id": "hp2s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write the `<h1>` with the name `Sam Rivera`, then a `<p>` with the bio `Learning to build things, one project at a time.`",
+      "answers": [
+       "<h1>Sam Rivera</h1>\n<p>Learning to build things, one project at a time.</p>"
+      ],
+      "hint": "Two tags, one after the other."
+     }
+    ]
+   },
+   {
+    "id": "hp3",
+    "title": "The links",
+    "buildNote": "Your page has three real links.",
+    "steps": [
+     {
+      "id": "hp3s1",
+      "kind": "learn",
+      "title": "Links as buttons",
+      "body": "Each link is an `<a>` with a `class` so you can style it as a button. They live in a `<nav>`. A link starting with `mailto:` opens the visitor's email app.",
+      "code": "<nav>\n  <a class=\"link\" href=\"https://github.com/sam\">GitHub</a>\n  <a class=\"link\" href=\"mailto:sam@example.com\">Email me</a>\n</nav>"
+     },
+     {
+      "id": "hp3s2",
+      "kind": "fixBug",
+      "title": "Fix the bug",
+      "body": "Two bugs: the `href` value needs quotes, and the closing tag is missing its `/`. Fix the link.",
+      "code": "<a class=\"link\" href=https://github.com/sam>GitHub<a>",
+      "answers": [
+       "<a class=\"link\" href=\"https://github.com/sam\">GitHub</a>"
+      ],
+      "hint": "Attribute values go in quotes."
+     },
+     {
+      "id": "hp3s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a link with the class `link` that opens an email to `sam@example.com`. Its text is `Email me`.",
+      "answers": [
+       "<a class=\"link\" href=\"mailto:sam@example.com\">Email me</a>"
+      ],
+      "hint": "href=\"mailto:...\""
+     }
+    ]
+   },
+   {
+    "id": "hp4",
+    "title": "Style it",
+    "buildNote": "Your page is centred, with big tappable buttons.",
+    "steps": [
+     {
+      "id": "hp4s1",
+      "kind": "learn",
+      "title": "Styling by class",
+      "body": "In CSS, a class is written with a dot. `max-width` plus `margin: 0 auto` centres a column on the page, and `text-align: center` centres the text inside it.",
+      "code": ".card {\n  max-width: 400px;\n  margin: 0 auto;\n  text-align: center;\n}"
+     },
+     {
+      "id": "hp4s2",
+      "kind": "gapFill",
+      "title": "Centre the column",
+      "body": "Fill in the value that centres the column sideways.",
+      "code": ".card {\n  max-width: 400px;\n  margin: 0 ___;\n}",
+      "options": [
+       "auto",
+       "center",
+       "middle",
+       "100%"
+      ],
+      "answers": [
+       "auto"
+      ]
+     },
+     {
+      "id": "hp4s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a CSS rule for `.link` that sets `display: block;` and `padding: 14px;`.",
+      "answers": [
+       ".link {\n  display: block;\n  padding: 14px;\n}",
+       ".link {\n  padding: 14px;\n  display: block;\n}"
+      ],
+      "hint": "A rule is: .name { property: value; }"
+     }
+    ]
+   },
+   {
+    "id": "hp5",
+    "title": "Finishing touches",
+    "buildNote": "Hover effects, safe external links and your finished page.",
+    "steps": [
+     {
+      "id": "hp5s1",
+      "kind": "learn",
+      "title": "Hover and new tabs",
+      "body": "`:hover` styles something while the mouse is over it. `target=\"_blank\"` opens a link in a new tab, and `rel=\"noopener\"` keeps that new tab safe.",
+      "code": ".link:hover {\n  background: #457b9d;\n}\n\n<a class=\"link\" href=\"https://github.com/sam\" target=\"_blank\" rel=\"noopener\">GitHub</a>"
+     },
+     {
+      "id": "hp5s2",
+      "kind": "gapFill",
+      "title": "Open in a new tab",
+      "body": "Fill in the value that opens a link in a new tab.",
+      "code": "<a href=\"https://github.com/sam\" target=\"___\" rel=\"noopener\">GitHub</a>",
+      "options": [
+       "_blank",
+       "_self",
+       "new",
+       "tab"
+      ],
+      "answers": [
+       "_blank"
+      ]
+     },
+     {
+      "id": "hp5s3",
+      "kind": "write",
+      "title": "Your turn",
+      "body": "Write a hover rule for `.link` that sets the `background` to `#457b9d`.",
+      "answers": [
+       ".link:hover {\n  background: #457b9d;\n}"
+      ],
+      "hint": "The selector is .link:hover"
+     }
+    ]
+   }
+  ]
+ }
+]

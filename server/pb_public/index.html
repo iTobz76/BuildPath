@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>BuildPath</title>
+<meta name="apple-mobile-web-app-title" content="BuildPath">
+<style>
+:root{--bg:#fff;--bg2:#f2f2f7;--fg:#000;--sub:#6c6c70;--blue:#007aff;--orange:#ff9500;--green:#34c759;--red:#ff3b30;--yellow:#ffcc00;--gray:#8e8e93;--purple:#af52de;color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root{--bg:#000;--bg2:#1c1c1e;--fg:#fff;--sub:#98989d;--blue:#0a84ff;--orange:#ff9f0a;--green:#30d158;--red:#ff453a;--yellow:#ffd60a;--purple:#bf5af2}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.35 -apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
+#app{max-width:640px;margin:0 auto;padding:0 16px 150px}
+h1{font-size:34px;margin:4px 0 8px}h2{font-size:22px;margin:12px 0 4px}h3{margin:6px 0}p{margin:6px 0 12px}
+.sub{color:var(--sub)}small{font-size:13px}a{color:inherit;text-decoration:none}
+hr{border:0;border-top:1px solid color-mix(in srgb,var(--gray) 35%,transparent);margin:14px 0}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:44px;position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.back,.right{color:var(--blue)}.right{text-align:right}
+.row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}
+.card{display:block;background:var(--bg2);border-radius:14px;padding:16px;margin:12px 0}
+.link:active{opacity:.6}.off{opacity:.5}
+.cap{font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px}
+.pb{height:6px;background:color-mix(in srgb,var(--gray) 30%,transparent);border-radius:3px;overflow:hidden;margin:8px 0}.pb i{display:block;height:100%;border-radius:3px;transition:width .3s}
+.ic{font-size:26px;width:30px;text-align:center}
+.g{color:var(--green)}.r{color:var(--red)}.o{color:var(--orange)}.y{color:var(--yellow)}
+code,.code,textarea,.line{font:15px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+code{background:var(--bg2);padding:1px 5px;border-radius:5px}
+.code{white-space:pre-wrap;background:var(--bg2);border-radius:10px;padding:12px;margin:12px 0;overflow-x:auto}
+.bl{color:var(--blue);font-weight:700}
+textarea{width:100%;min-height:170px;background:var(--bg2);color:var(--fg);border:0;border-radius:10px;padding:12px;resize:vertical;outline:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{font:15px ui-monospace,Menlo,monospace;background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue);border:0;border-radius:8px;padding:9px 14px}
+.line{display:block;width:100%;text-align:left;white-space:pre-wrap;background:var(--bg2);color:var(--fg);border:0;border-radius:8px;padding:10px;margin:6px 0}
+.slot{min-height:44px;color:var(--sub);display:flex;align-items:center;justify-content:center}
+.btn{width:100%;background:var(--blue);color:#fff;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:600;font-family:inherit}.btn:disabled{opacity:.35}
+.tb{background:none;border:0;color:var(--blue);font:inherit;padding:6px 0}.tb:disabled{opacity:.4}
+.fb{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.fb>*{display:block;max-width:608px;margin:6px auto;font-weight:600;text-align:center}
+.center{text-align:center;padding-top:60px}.seal{font-size:64px;color:var(--green)}
+.done{background:color-mix(in srgb,var(--green) 12%,transparent)}
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+.pane{width:100%;max-width:640px;margin:0;border-radius:20px 20px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.pane input{width:100%;font-size:17px;padding:12px;margin:6px 0;border:0;border-radius:10px;background:var(--bg);color:var(--fg);outline:0}
+.pane .btn{margin:8px 0}
+.wrap{flex-wrap:wrap}
+.wk{display:flex;gap:6px}
+.wk i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:color-mix(in srgb,var(--gray) 25%,transparent);color:var(--sub)}
+.wk i.on{background:var(--orange);color:#fff}.wk i.today{outline:2px solid var(--blue);outline-offset:1px}
+.chat{max-height:42vh;overflow:auto;margin:8px 0}
+.msg{padding:10px 12px;border-radius:14px;margin:6px 0;max-width:88%;white-space:pre-wrap}
+.me{background:var(--blue);color:#fff;margin-left:auto}.bot{background:var(--bg)}
+#tq{flex:1;width:auto}
+</style></head>
+<body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/`(.+?)`/g,'<code>$1</code>');
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+const label=c=>c.language=='html'?'HTML':cap(c.language);
+// Answer checking: same rules as the Swift app
+const quotes=s=>s.replace(/[\u201C\u201D]/g,'"').replace(/[\u2018\u2019]/g,"'");
+const normCode=s=>quotes(s).replace(/\s/g,'');
+const normPy=s=>{const L=quotes(s).replace(/\t/g,'    ').split('\n').filter(l=>l.trim()),w=L.map(l=>l.length-l.trimStart().length),v=[...new Set(w)].sort((a,b)=>a-b);return L.map((l,i)=>v.indexOf(w[i])+'|'+l.replace(/\s/g,'')).join('\n')};
+const normHtml=s=>quotes(s).toLowerCase().replace(/\s/g,'').replace(/'/g,'"').replace(/\/>/g,'>');
+const day=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+
+// ---- Daily streak maths: a "day" is a local date like 2026-10-21 ----
+const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return day(d)};
+// consecutive practised days ending today (or yesterday, so a streak survives until a whole day is missed)
+const streakOf=(days,today)=>{const set=new Set(days);let d=set.has(today)?today:addDays(today,-1),n=0;while(set.has(d)){n++;d=addDays(d,-1)}return n};
+const bestOf=days=>{let best=0,run=0,prev=null;for(const d of [...days].sort()){run=prev&&addDays(prev,1)==d?run+1:1;best=Math.max(best,run);prev=d}return best};
+// older saves only had a streak count, so rebuild the days behind it
+const daysOf=d=>d.days&&d.days.length?d.days:(d.streak>0&&d.lastActive?Array.from({length:d.streak},(_,i)=>addDays(d.lastActive,i-d.streak+1)):[]);
+
+// Progress (XP, daily streak, completed lessons, resume position), saved on this device
+const Store={key:'learn.progress',d:null,
+ load(){let o;try{o=JSON.parse(localStorage.getItem(this.key))}catch(e){}this.d=Object.assign({xp:0,streak:0,best:0,completed:[],positions:{},lastActive:null,days:[]},o||{});this.d.days=daysOf(this.d);this.calc()},
+ calc(){const d=this.d;d.days=[...new Set(d.days)].sort().slice(-400);d.streak=streakOf(d.days,day(new Date()));d.best=Math.max(d.best||0,bestOf(d.days),d.streak);d.lastActive=d.days[d.days.length-1]||null},
+ cur(){return streakOf(this.d.days,day(new Date()))},
+ save(quiet){this.calc();try{localStorage.setItem(this.key,JSON.stringify(this.d))}catch(e){}if(!quiet)Sync.sched()},
+ pos(l){return Math.min(Math.max(this.d.positions[l.id]||0,0),l.steps.length-1)},
+ inProg(l){return(this.d.positions[l.id]||0)>0},
+ done(l){return this.d.completed.includes(l.id)},
+ touch(){const t=day(new Date());if(!this.d.days.includes(t))this.d.days.push(t)},   // any finished step counts as practising today
+ setPos(id,i){this.d.positions[id]=i;this.touch();this.save()},
+ complete(l){const d=this.d;if(!this.done(l)){d.xp+=l.steps.length*10;d.completed.push(l.id)}delete d.positions[l.id];this.touch();this.save()}};
+
+let COURSES=[],P=null; // P = the lesson being played
+const accent=c=>c.language=='python'?'var(--blue)':c.language=='html'?'var(--purple)':'var(--orange)';
+const bar=(v,t,c='var(--blue)')=>`<div class="pb"><i style="width:${t?100*v/t:0}%;background:${c}"></i></div>`;
+const acctLabel=()=>Auth.u?'● '+esc(Auth.u.email.split('@')[0]):'Sign in';
+const navbar=(back,title)=>`<div class="nav"><span>${back?`<a class="back" href="${back}">‹ Back</a>`:''}</span><b>${title?esc(title):''}</b><span class="right"><button class="tb" data-a="sheet">${acctLabel()}</button></span></div>`;
+const cur=()=>P.l.steps[P.i],blanks=s=>s.code.split('___').length-1;
+const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const init=s=>s.kind=='gapFill'?{f:[],st:''}:s.kind=='reorder'?{pool:sh(s.lines.map((_,i)=>i)),ch:[],st:''}:{t:s.code||'',st:'',hint:false};
+
+function streakCard(){const t=day(new Date()),d=Store.d,cur=Store.cur(),on=d.days.includes(t),set=new Set(d.days);
+ const wk=[6,5,4,3,2,1,0].map(i=>{const s=addDays(t,-i);return`<i class="${set.has(s)?'on':''}${i?'':' today'}">${new Date(s+'T00:00:00').toLocaleDateString(undefined,{weekday:'narrow'})}</i>`}).join('');
+ return`<div class="card"><div class="row between wrap"><div><b class="o">🔥 ${cur}-day streak</b><br><small class="sub">Best: ${d.best} ${d.best==1?'day':'days'}</small></div><div class="wk">${wk}</div></div><p class="sub" style="margin:8px 0 0"><small>${on?"You've practised today. See you tomorrow!":cur?'Finish any step today to keep your streak alive.':'Finish a step today to start your streak.'}</small></p></div>`}
+function home(){const d=Store.d;
+ app.innerHTML=navbar()+`<h1>BuildPath</h1><div class="row between"><b class="o">🔥 ${Store.cur()}</b><b class="y">⭐ ${d.xp} XP</b></div>${streakCard()}<p class="sub">Pick a course. Every one ends with something you built.</p>`+
+ COURSES.map(c=>{const n=c.lessons.filter(l=>Store.done(l)).length,st=c.lessons.some(l=>Store.inProg(l)),a=accent(c);
+  return `<a class="card link" href="#/c/${c.id}"><div class="row between"><span class="row" style="gap:6px"><span class="cap" style="color:${a};background:color-mix(in srgb,${a} 20%,transparent)">${label(c)}</span>${c.kind=='project'?'<span class="cap" style="color:var(--green);background:color-mix(in srgb,var(--green) 20%,transparent)">Project</span>':''}</span>${n==c.lessons.length?'<span class="g">✓</span>':st?'<small class="sub">In progress</small>':''}</div><h3>${esc(c.title)}</h3><p class="sub">${esc(c.subtitle)}</p>${bar(n,c.lessons.length,a)}<small class="sub">${n} of ${c.lessons.length} lessons</small></a>`}).join('')}
+
+function course(id){const c=COURSES.find(x=>x.id==id);if(!c){location.hash='#/';return}
+ const n=c.lessons.filter(l=>Store.done(l)).length;
+ app.innerHTML=navbar('#/')+`<h1>${esc(c.title)}</h1><p class="sub">${esc(c.subtitle)}</p><b>Building: ${esc(c.capstone)}</b>${bar(n,c.lessons.length)}`+
+ c.lessons.map((l,i)=>{const un=i==0||Store.done(c.lessons[i-1]),dn=Store.done(l),res=!dn&&Store.inProg(l);
+  const ic=dn?'✓':un?'▶':'🔒',col=dn?'var(--green)':un?'var(--blue)':'var(--gray)',tag=un?`a href="#/l/${c.id}/${l.id}"`:'div';
+  return `<${tag} class="card link row ${un?'':'off'}"><span class="ic" style="color:${col}">${ic}</span><div><b>${i+1}. ${esc(l.title)}</b><br><small class="sub">${res?`Resume at step ${Store.pos(l)+1} of ${l.steps.length}`:esc(l.buildNote)}</small></div></${un?'a':'div'}>`}).join('')+
+ (n==c.lessons.length?`<div class="card done"><b>🎉 You built a ${esc(c.capstone)}!</b><pre class="code">${esc(c.capstoneCode)}</pre><button class="tb" data-a="share" data-c="${c.id}">Share your build</button></div>`:'')}
+
+function lesson(cid,lid){const c=COURSES.find(x=>x.id==cid),l=c&&c.lessons.find(x=>x.id==lid);if(!l){location.hash='#/';return}
+ if(!P||P.l!==l)P={c,l,i:Store.pos(l),fin:false,S:null};stepView()}
+
+function body(s){const S=P.S;
+ if(s.kind=='learn')return s.code?`<pre class="code">${esc(s.code)}</pre>`:'';
+ if(s.kind=='gapFill'){const p=s.code.split('___');
+  return `<pre class="code">${p.map((x,i)=>esc(x)+(i<p.length-1?`<span class="bl">[ ${esc(S.f[i]||'___')} ]</span>`:'')).join('')}</pre><div class="chips">${s.options.map((o,i)=>`<button class="chip" data-a="chip" data-i="${i}">${esc(o)}</button>`).join('')}</div><button class="tb" data-a="undo" ${S.f.length?'':'disabled'}>↩ Undo</button>`}
+ if(s.kind=='reorder'){const L=(a,k)=>a.map(i=>`<button class="line" data-a="${k}" data-i="${i}">${esc(s.lines[i])}</button>`).join('');
+  return `<small class="sub">Your answer</small>${L(S.ch,'unpick')||'<div class="slot">Tap the lines below to build the code</div>'}<hr>${L(S.pool,'pick')}`}
+ return `<textarea id="ta" spellcheck="false" autocapitalize="off" autocorrect="off">${esc(S.t)}</textarea>${s.hint?'<button class="tb" data-a="hint">Show hint</button>':''}`}
+
+function stepView(){const{c,l}=P;let h=navbar('#/c/'+c.id,l.title);
+ if(P.fin){app.innerHTML=h+`<div class="center"><div class="seal">✓</div><h1>Lesson complete!</h1><p class="sub">${esc(l.buildNote)}</p><p><b>+${l.steps.length*10} XP</b></p><button class="btn" data-a="done">Done</button></div>`;return}
+ const s=cur();if(!P.S)P.S=init(s);
+ app.innerHTML=h+bar(P.i,l.steps.length)+`<h2>${esc(s.title)}</h2><p>${md(s.body)}</p>`+body(s)+'<div class="fb" id="fb"></div>';fb()}
+
+function fb(){const s=cur(),S=P.S,el=$('#fb');if(!el)return;
+ if(s.kind=='learn'){el.innerHTML='<button class="btn" data-a="next">Continue</button><button class="tb" data-a="ask">Quiz me on this</button>';return}
+ const ok=S.st=='ok',can=ok||(s.kind=='gapFill'?S.f.length==blanks(s):s.kind=='reorder'?!S.pool.length:S.t.length>0);
+ el.innerHTML=(ok?'<div class="g">✓ Correct!</div>':S.st=='no'?'<div class="r">✗ Not quite. Try again.</div>':'')+`<button class="btn" data-a="${ok?'next':'check'}" ${can?'':'disabled'}>${ok?'Continue':'Check'}</button><button class="tb" data-a="ask">${ok?'Check my understanding':'Ask the tutor'}</button>`}
+
+const A={
+ chip(b){const s=cur(),S=P.S;if(S.f.length<blanks(s)){S.f.push(s.options[+b.dataset.i]);S.st='';stepView()}},
+ undo(){P.S.f.pop();P.S.st='';stepView()},
+ pick(b){const S=P.S,i=+b.dataset.i;S.pool=S.pool.filter(x=>x!=i);S.ch.push(i);S.st='';stepView()},
+ unpick(b){const S=P.S,i=+b.dataset.i;S.ch=S.ch.filter(x=>x!=i);S.pool.push(i);S.st='';stepView()},
+ hint(b){P.S.hint=true;b.textContent=cur().hint},
+ check(){const s=cur(),S=P.S;let ok;
+  if(s.kind=='gapFill')ok=S.f.join('\n')==s.answers.join('\n');
+  else if(s.kind=='reorder')ok=S.ch.map(i=>s.lines[i]).join('\n')==s.lines.join('\n');
+  else{const f=P.c.language=='python'?normPy:P.c.language=='html'?normHtml:normCode,a=f(S.t);ok=s.answers.some(x=>f(x)==a)}
+  S.st=ok?'ok':'no';fb()},
+ next(){const{l}=P;window.scrollTo(0,0);
+  if(P.i+1<l.steps.length){P.i++;P.S=null;Store.setPos(l.id,P.i)}else{Store.complete(l);P.fin=true}stepView()},
+ done(){const id=P.c.id;P=null;location.hash='#/c/'+id},
+ share(b){const t=COURSES.find(x=>x.id==b.dataset.c).capstoneCode;navigator.share?navigator.share({text:t}).catch(()=>{}):navigator.clipboard.writeText(t).then(()=>b.textContent='Copied!')}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a])A[b.dataset.a](b)});
+document.addEventListener('input',e=>{if(e.target.id=='ta'){P.S.t=e.target.value;P.S.st='';fb()}});
+
+function render(){const r=location.hash.slice(2).split('/');window.scrollTo(0,0);
+ if(r[0]!='l')P=null;
+ if(r[0]=='c')course(r[1]);else if(r[0]=='l')lesson(r[1],r[2]);else home()}
+// ---- Accounts & sync (PocketBase, same origin: /api/...) ----
+const Auth={t:null,u:null,fresh:false,
+ load(){try{const a=JSON.parse(localStorage.getItem('learn.auth'));if(a){this.t=a.t;this.u=a.u}}catch(e){}},
+ keep(){try{this.t?localStorage.setItem('learn.auth',JSON.stringify({t:this.t,u:this.u})):localStorage.removeItem('learn.auth')}catch(e){}},
+ set(j){this.t=j.token;this.u={id:j.record.id,email:j.record.email};this.keep()},
+ async req(p,o={}){const r=await fetch('/api/collections/'+p,{...o,headers:{'Content-Type':'application/json',...(this.t?{Authorization:this.t}:{})}});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const f=j.data&&Object.values(j.data)[0],e=new Error((f&&f.message)||j.message||'Something went wrong');e.status=r.status;throw e}return j},
+ async login(em,pw){this.t=null;this.set(await this.req('users/auth-with-password',{method:'POST',body:JSON.stringify({identity:em,password:pw})}));this.fresh=true},
+ async signup(em,pw){this.t=null;await this.req('users/records',{method:'POST',body:JSON.stringify({email:em,password:pw,passwordConfirm:pw})});await this.login(em,pw)},
+ out(){this.t=this.u=null;this.fresh=false;this.keep()}};
+const calcXp=done=>COURSES.flatMap(c=>c.lessons).filter(l=>done.includes(l.id)).reduce((s,l)=>s+l.steps.length*10,0);
+// Merge two devices' progress: keep every completed lesson, the furthest resume step, and the newer streak.
+function merge(a,b){const done=[...new Set([...(a.completed||[]),...(b.completed||[])])].sort(),pos={},ap=a.positions||{},bp=b.positions||{};
+ for(const k of [...new Set([...Object.keys(ap),...Object.keys(bp)])].sort())if(!done.includes(k))pos[k]=Math.max(ap[k]||0,bp[k]||0);
+ const days=[...new Set([...daysOf(a),...daysOf(b)])].sort().slice(-400),st=streakOf(days,day(new Date()));
+ return{xp:calcXp(done),streak:st,best:Math.max(a.best||0,b.best||0,bestOf(days),st),completed:done,positions:pos,lastActive:days[days.length-1]||null,days}}
+const Sync={status:'',busy:false,timer:null,
+ sched(){if(Auth.t){clearTimeout(this.timer);this.timer=setTimeout(()=>this.run(),1500)}},
+ async run(){if(!Auth.t||this.busy||!COURSES.length)return;this.busy=true;
+  try{
+   if(!Auth.fresh){try{Auth.set(await Auth.req('users/auth-refresh',{method:'POST'}));Auth.fresh=true}catch(e){if(e.status){Auth.out();this.status='Session expired. Please sign in again.';refresh();return}throw e}}
+   const rs=await Auth.req('progress/records?perPage=1&filter='+encodeURIComponent('(user="'+Auth.u.id+'")')),rec=rs.items[0],before=JSON.stringify(Store.d),
+    m=merge(Store.d,rec?rec.data:Store.d);
+   Store.d=m;Store.save(true);
+   if(!rec)await Auth.req('progress/records',{method:'POST',body:JSON.stringify({user:Auth.u.id,data:m})});
+   else if(JSON.stringify(merge(rec.data,rec.data))!=JSON.stringify(m))await Auth.req('progress/records/'+rec.id,{method:'PATCH',body:JSON.stringify({data:m})});
+   this.status='Synced '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+   if(JSON.stringify(m)!=before&&!P)render();
+  }catch(e){this.status=e.status?e.message:'Offline. Will retry when you are back online.'}
+  finally{this.busy=false;const s=$('#ss');if(s)s.textContent=this.status}}};
+const refresh=()=>P?stepView():render();
+let mode='in';
+function sheet(){const old=$('.sheet');if(old)old.remove();const d=document.createElement('div');d.className='sheet';
+ d.innerHTML='<div class="card pane">'+(Auth.u?`<h2>Account</h2><p>${esc(Auth.u.email)}</p><p class="sub">🔥 ${Store.cur()}-day streak · best ${Store.d.best}</p><p class="sub" id="ss">${esc(Sync.status)}</p><button class="btn" data-a="syncnow">Sync now</button><button class="tb" data-a="signout">Sign out</button>`:
+ `<h2>${mode=='in'?'Sign in':'Create account'}</h2><p class="sub">Sync your progress across your devices.</p><input id="em" type="email" placeholder="Email" autocomplete="email" autocapitalize="off"><input id="pw" type="password" placeholder="Password (8+ characters)" autocomplete="${mode=='in'?'current-password':'new-password'}"><p class="r" id="er"></p><button class="btn" data-a="submit">${mode=='in'?'Sign in':'Create account'}</button><button class="tb" data-a="mode">${mode=='in'?'New here? Create an account':'Have an account? Sign in'}</button>`)+'<br><button class="tb" data-a="close">Close</button></div>';
+ document.body.appendChild(d)}
+Object.assign(A,{
+ sheet(){sheet()},close(){const s=$('.sheet');if(s)s.remove();mode='in'},
+ mode(){mode=mode=='in'?'up':'in';sheet()},
+ async submit(b){const em=$('#em').value.trim(),pw=$('#pw').value,er=$('#er');er.textContent='';b.disabled=true;
+  try{await(mode=='in'?Auth.login(em,pw):Auth.signup(em,pw));A.close();await Sync.run();refresh()}catch(e){er.textContent=e.status?(/unique/i.test(e.message)?'That email already has an account. Try signing in.':e.message):'Cannot reach the server.';b.disabled=false}},
+ signout(){Auth.out();Sync.status='';A.close();refresh()},
+ async syncnow(){Auth.fresh=false;await Sync.run()}});
+document.addEventListener('click',e=>{if(e.target.classList&&e.target.classList.contains('sheet'))A.close()});
+
+// ---- AI tutor: asks questions instead of giving answers (the server holds the API key) ----
+const GREET={stuck:"I won't hand you the answer, but I'll help you find it. What have you tried, and what do you think is going wrong?",check:'In your own words: what does this do, and why does it work?'};
+const attemptOf=(s,S)=>s.kind=='gapFill'?S.f.join(', '):s.kind=='reorder'?S.ch.map(i=>s.lines[i]).join('\n'):s.kind=='learn'?'':S.t;
+function tutorSheet(){const old=$('.sheet');if(old)old.remove();const C=P.S.chat,d=document.createElement('div');d.className='sheet';
+ d.innerHTML='<div class="card pane"><h2>Tutor</h2>'+(!Auth.u?'<p class="sub">Sign in to use the tutor. It asks you questions to help you work things out yourself.</p><button class="btn" data-a="signinfirst">Sign in</button>':
+  '<div class="chat" id="chat">'+C.msgs.map(m=>`<div class="msg ${m.role=='user'?'me':'bot'}">${esc(m.content)}</div>`).join('')+(C.busy?'<div class="msg bot sub">Thinking…</div>':'')+'</div>'+
+  `<div class="row"><input id="tq" placeholder="Type your answer…" autocomplete="off" ${C.busy?'disabled':''}><button class="btn" style="width:auto;padding:12px 16px" data-a="tsend" ${C.busy?'disabled':''}>Send</button></div>`)+
+  '<button class="tb" data-a="close">Close</button></div>';
+ document.body.appendChild(d);const ch=$('#chat');if(ch)ch.scrollTop=ch.scrollHeight;const q=$('#tq');if(q&&!C.busy)q.focus()}
+Object.assign(A,{
+ ask(){const s=cur(),S=P.S,mode=s.kind=='learn'||S.st=='ok'?'check':'stuck';
+  if(!S.chat||S.chat.mode!==mode)S.chat={mode,msgs:[{role:'assistant',content:GREET[mode]}],busy:false};tutorSheet()},
+ signinfirst(){A.close();A.sheet()},
+ async tsend(){const C=P.S.chat,q=$('#tq'),text=q&&q.value.trim();if(!text||C.busy)return;
+  C.msgs.push({role:'user',content:text});C.busy=true;tutorSheet();
+  const bot=(content,err)=>C.msgs.push({role:'assistant',content,err});
+  try{const s=cur(),r=await fetch('/api/tutor',{method:'POST',headers:{'Content-Type':'application/json',Authorization:Auth.t},
+    body:JSON.stringify({mode:C.mode,courseId:P.c.id,lessonId:P.l.id,stepId:s.id,attempt:attemptOf(s,P.S),messages:C.msgs.slice(1).filter(m=>!m.err).map(({role,content})=>({role,content}))})});
+   const j=await r.json().catch(()=>({}));
+   if(r.ok)bot(j.reply);else bot(r.status==401||r.status==403?'Please sign in again.':(j.message||'The tutor is unavailable right now. Try again in a moment.'),true)
+  }catch(e){bot('I cannot reach the server. Check your connection and try again.',true)}
+  C.busy=false;if($('.sheet'))tutorSheet()}});
+document.addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.id=='tq')A.tsend()});
+
+Auth.load();Store.load();
+fetch('courses.json').then(r=>r.json()).then(j=>{COURSES=j;render();Sync.run()}).catch(()=>{app.textContent='Could not load the courses.'});
+addEventListener('hashchange',render);
+addEventListener('online',()=>Sync.run());
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='visible')Sync.run()});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+</script></body></html>

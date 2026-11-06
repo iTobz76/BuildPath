@@ -1,0 +1,26 @@
+services:
+  pocketbase:
+    build: .
+    container_name: learn-pocketbase
+    restart: unless-stopped
+    ports:
+      - "8090:8090"          # don't port-forward this on your router
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}        # set in server/.env (never commit it)
+      TUTOR_MODEL: ${TUTOR_MODEL:-claude-haiku-5-5}
+      TUTOR_DAILY_LIMIT: ${TUTOR_DAILY_LIMIT:-40}      # tutor questions per user per day
+      TUTOR_PROVIDER: ${TUTOR_PROVIDER:-anthropic}     # "anthropic" or "ollama"
+      OLLAMA_URL: ${OLLAMA_URL:-}                      # e.g. http://192.168.1.50:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5-coder:7b}
+      OLLAMA_KEEP_ALIVE: ${OLLAMA_KEEP_ALIVE:-5m}      # shorter frees your GPU sooner after a question
+      TUTOR_SHARE_REFERENCE: ${TUTOR_SHARE_REFERENCE:-}  # leave empty for the sensible default
+    volumes:
+      - ./pb_data:/pb/pb_data              # the database: back this up
+      - ./pb_public:/pb/pb_public          # the web app (index.html etc.)
+      - ./pb_migrations:/pb/pb_migrations  # creates the collections on first start
+      - ./pb_hooks:/pb/pb_hooks            # the AI tutor route
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8090/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
